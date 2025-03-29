@@ -9,9 +9,9 @@ const model = genAI.getGenerativeModel({
 });
 
 const generationConfig = {
-  temperature: 0.7,
+  temperature: 0.8,
   topP: 0.95,
-  topK: 40,
+  topK: 64,
   maxOutputTokens: 1024,
 };
 
@@ -43,7 +43,7 @@ export async function generateScenarioWithGemini(prompt: string): Promise<string
     return result.response.text();
   } catch (error) {
     console.error("Error generating text with Gemini:", error);
-    return "I couldn't generate a response right now. Let's continue our conversation.";
+    return "لم أتمكن من إنشاء استجابة الآن. دعنا نواصل محادثتنا.";
   }
 }
 
@@ -53,14 +53,18 @@ export async function generateResponseWithGemini(
   conversation?: { role: string, content: string }[]
 ): Promise<string> {
   let prompt = "";
+  const lastMessage = conversation && conversation.length > 0 ? conversation[conversation.length - 1].content : "مرحبا";
   
   if (mode === "sweetTalk") {
-    prompt = "You are Alex, a caring AI companion. Respond in a sweet, affectionate, but respectful manner. Keep your response to 1-3 sentences. Your user just said: " + 
-      (conversation && conversation.length > 0 ? conversation[conversation.length - 1].content : "Hello");
+    prompt = `أنت أليكس، رفيق ذكاء اصطناعي مهتم. استجب بطريقة حلوة وعاطفية، ولكن محترمة. حافظ على استجابتك في 1-3 جمل باللغة العربية. المستخدم الخاص بك قال للتو: ${lastMessage}`;
   } else if (mode === "roleplay" && scenarioId) {
-    prompt = "Continue this roleplay scenario in a descriptive, engaging way. Write 2-3 sentences from Alex's perspective, describing actions, emotions, and dialogue. Make it immersive and romantic without being explicit. Scenario: " +
-      (conversation && conversation.length > 0 ? conversation.map(msg => msg.content).join("\n") : "We just met");
+    prompt = `واصل سيناريو لعب الأدوار هذا بطريقة وصفية وجذابة. اكتب 2-3 جمل من منظور أليكس، تصف الإجراءات والعواطف والحوار باللغة العربية. اجعلها غامرة ورومانسية دون أن تكون صريحة. السيناريو: ${conversation && conversation.length > 0 ? conversation.map(msg => msg.content).join("\n") : "لقد التقينا للتو"}`;
   }
   
-  return generateScenarioWithGemini(prompt);
+  try {
+    return await generateScenarioWithGemini(prompt);
+  } catch (error) {
+    console.error("Error generating response with Gemini:", error);
+    return "لم أتمكن من إنشاء استجابة الآن. دعنا نواصل محادثتنا.";
+  }
 }
