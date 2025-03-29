@@ -8,9 +8,9 @@ import ChatInterface from "@/components/ChatInterface";
 const Index: React.FC = () => {
   return (
     <ChatProvider>
-      <div className="flex flex-col h-screen bg-background">
+      <div className="flex flex-col h-screen bg-background overflow-hidden">
         <Header />
-        <main className="flex-1 overflow-hidden pt-16 pb-16 flex flex-col">
+        <main className="flex-1 pt-16 pb-16 flex flex-col overflow-hidden">
           <ChatInterface />
         </main>
         <Footer />

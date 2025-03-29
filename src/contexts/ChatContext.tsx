@@ -9,8 +9,9 @@ import {
 import { 
   sweetTalkInitialMessages, 
   roleplayInitialMessages,
-  generateAIResponse
+  roleplayScenarios
 } from "../data/sampleMessages";
+import { generateResponseWithGemini } from "../utils/geminiApi";
 import { useToast } from "@/components/ui/use-toast";
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -34,7 +35,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [mode]);
 
-  const sendMessage = (text: string) => {
+  const sendMessage = async (text: string) => {
     if (!text.trim()) return;
 
     const newUserMessage: Message = {
@@ -47,11 +48,23 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     setMessages((prev) => [...prev, newUserMessage]);
     setIsTyping(true);
 
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse = generateAIResponse(
+    try {
+      // Prepare conversation history for Gemini API
+      const conversationHistory = messages.slice(-5).map(msg => ({
+        role: msg.sender === "user" ? "user" : "assistant",
+        content: msg.text,
+      }));
+      
+      conversationHistory.push({
+        role: "user",
+        content: text,
+      });
+      
+      // Generate AI response using Gemini API
+      const aiResponse = await generateResponseWithGemini(
         mode, 
-        scenarioSelected?.id
+        scenarioSelected?.id,
+        conversationHistory
       );
       
       const newAIMessage: Message = {
@@ -62,8 +75,14 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
       };
 
       setMessages((prev) => [...prev, newAIMessage]);
+    } catch (error) {
+      console.error("Error generating response:", error);
+      toast({
+        description: "There was an error generating a response. Please try again.",
+      });
+    } finally {
       setIsTyping(false);
-    }, 1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+    }
   };
 
   const clearMessages = () => {
@@ -78,7 +97,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     });
   };
 
-  const selectScenario = (scenario: RoleplayScenario | null) => {
+  const selectScenario = async (scenario: RoleplayScenario | null) => {
     setScenarioSelected(scenario);
     
     if (scenario) {
@@ -95,9 +114,10 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
       setTimeout(() => {
         setIsTyping(true);
         
-        setTimeout(() => {
-          const aiResponse = generateAIResponse(mode, scenario.id);
-          
+        generateResponseWithGemini(mode, scenario.id, [
+          { role: "assistant", content: newAIMessage.text }
+        ])
+        .then(aiResponse => {
           const firstRoleplayMessage: Message = {
             id: (Date.now() + 1).toString(),
             sender: "ai",
@@ -106,8 +126,16 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
           };
           
           setMessages((prev) => [...prev, firstRoleplayMessage]);
+        })
+        .catch(error => {
+          console.error("Error generating initial roleplay message:", error);
+          toast({
+            description: "There was an error starting the roleplay. Please try again.",
+          });
+        })
+        .finally(() => {
           setIsTyping(false);
-        }, 2000);
+        });
       }, 1000);
     }
   };

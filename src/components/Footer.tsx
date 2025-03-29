@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-card/80 backdrop-blur-md border-t border-border/50 p-4 fixed bottom-0 left-0 w-full z-10">
+    <footer className="bg-card/80 backdrop-blur-md border-t border-border/50 p-3 fixed bottom-0 left-0 w-full z-10">
       <form onSubmit={handleSubmit} className="flex items-center">
         <Input
           ref={inputRef}
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
           placeholder={isTyping ? "Alex is typing..." : "Type a message..."}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="flex-1 bg-muted border-muted mr-2 focus-visible:ring-primary"
+          className="flex-1 bg-muted/50 border-muted mr-2 rounded-full focus-visible:ring-primary"
           disabled={isTyping}
         />
         <Button 
@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
           className={`rounded-full ${
             message.trim() && !isTyping
               ? "bg-primary hover:bg-primary/90"
-              : "bg-muted text-muted-foreground"
+              : "bg-muted/50 text-muted-foreground"
           }`}
         >
           <Send className="h-4 w-4" />
