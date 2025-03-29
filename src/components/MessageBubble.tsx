@@ -27,7 +27,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, isLatest }) => {
       )}
     >
       {!isUser && (
-        <Avatar className="h-8 w-8 sm:h-9 sm:w-9 mr-2 mt-1 border border-primary/20 flex-shrink-0">
+        <Avatar className="h-8 w-8 sm:h-9 sm:w-9 mr-2 mt-1 border border-accent/20 flex-shrink-0 shadow-sm">
           <AvatarImage src="/lovable-uploads/624a3e22-88e3-42bc-8da6-c6d619d9c10a.png" alt="Alex" />
           <AvatarFallback className="bg-primary/20"></AvatarFallback>
         </Avatar>
@@ -36,10 +36,10 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, isLatest }) => {
       <div className={cn("max-w-[75%] sm:max-w-[70%]", isUser ? "items-end" : "items-start")}>
         <div
           className={cn(
-            "px-3 py-2 sm:px-4 sm:py-3 rounded-2xl text-sm sm:text-base mb-1",
+            "px-3 py-2 sm:px-4 sm:py-3 rounded-2xl text-sm sm:text-base mb-1 shadow-sm",
             isUser
-              ? "bg-primary text-primary-foreground rounded-br-sm"
-              : "bg-card text-card-foreground rounded-bl-sm"
+              ? "message-bubble-user text-primary-foreground rounded-br-sm"
+              : "message-bubble-bot text-card-foreground rounded-bl-sm"
           )}
           dir={containsArabic ? "rtl" : "ltr"}
         >
@@ -56,9 +56,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, isLatest }) => {
       </div>
 
       {isUser && (
-        <Avatar className="h-8 w-8 sm:h-9 sm:w-9 ml-2 mt-1 border border-primary/20 flex-shrink-0">
+        <Avatar className="h-8 w-8 sm:h-9 sm:w-9 ml-2 mt-1 border border-secondary/20 flex-shrink-0 shadow-sm">
           <AvatarImage src="/lovable-uploads/0aa33a32-a44c-4cc6-a1d7-a00829a8b8ef.png" alt="You" />
-          <AvatarFallback className="bg-primary/20"></AvatarFallback>
+          <AvatarFallback className="bg-secondary/20"></AvatarFallback>
         </Avatar>
       )}
     </div>

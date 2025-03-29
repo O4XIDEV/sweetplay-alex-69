@@ -4,6 +4,7 @@ import { useChat } from "@/contexts/ChatContext";
 import MessageBubble from "./MessageBubble";
 import ScenarioSelector from "./ScenarioSelector";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { MessageCircle } from "lucide-react";
 
 const ChatInterface: React.FC = () => {
   const { messages, isTyping, mode, scenarioSelected } = useChat();
@@ -23,8 +24,9 @@ const ChatInterface: React.FC = () => {
     <div className="flex-1 overflow-y-auto px-2 sm:px-3 py-3 sm:py-4 pb-16 sm:pb-20 md:px-4">
       <div className="max-w-2xl mx-auto space-y-4 sm:space-y-6">
         {messages.length === 0 ? (
-          <div className="flex items-center justify-center h-full py-10">
-            <p className="text-muted-foreground text-sm">ابدأ المحادثة مع اليكس!</p>
+          <div className="flex flex-col items-center justify-center h-full py-10 animate-fade-in">
+            <MessageCircle className="h-10 w-10 text-accent mb-3 opacity-70" />
+            <p className="text-muted-foreground text-sm bg-card/50 py-2 px-4 rounded-full">ابدأ المحادثة مع اليكس!</p>
           </div>
         ) : (
           messages.map((message, index) => (
@@ -42,7 +44,7 @@ const ChatInterface: React.FC = () => {
               <AvatarImage src="/lovable-uploads/624a3e22-88e3-42bc-8da6-c6d619d9c10a.png" alt="Alex" />
               <AvatarFallback className="bg-primary/20"></AvatarFallback>
             </Avatar>
-            <div className="bg-card/50 px-3 py-2 sm:px-4 sm:py-3 rounded-2xl rounded-bl-sm text-muted-foreground max-w-[80%]">
+            <div className="bg-card/80 px-3 py-2 sm:px-4 sm:py-3 rounded-2xl rounded-bl-sm text-muted-foreground max-w-[80%] shadow-sm">
               <div className="typing-indicator">
                 <span></span>
                 <span></span>

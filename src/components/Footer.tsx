@@ -35,16 +35,16 @@ const Footer: React.FC = () => {
             placeholder={isTyping ? "أليكس عم يكتب..." : "اكتب رسالة..."}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="flex-1 bg-muted/50 border-muted mr-2 rounded-full focus-visible:ring-primary text-sm sm:text-base h-10 sm:h-12"
+            className="flex-1 bg-muted/50 border-muted mr-2 rounded-full focus-visible:ring-accent text-sm sm:text-base h-10 sm:h-12 shadow-sm"
             disabled={isTyping}
           />
           <Button 
             type="submit" 
             size="icon"
             disabled={!message.trim() || isTyping}
-            className={`rounded-full h-10 w-10 sm:h-12 sm:w-12 ${
+            className={`rounded-full h-10 w-10 sm:h-12 sm:w-12 shadow-sm ${
               message.trim() && !isTyping
-                ? "bg-primary hover:bg-primary/90"
+                ? "bg-accent hover:bg-accent/90 text-accent-foreground"
                 : "bg-muted/50 text-muted-foreground"
             }`}
           >

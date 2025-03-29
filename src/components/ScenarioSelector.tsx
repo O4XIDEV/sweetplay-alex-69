@@ -3,7 +3,7 @@ import React from "react";
 import { useChat } from "@/contexts/ChatContext";
 import { roleplayScenarios } from "@/data/sampleMessages";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Theater } from "lucide-react";
 
 const ScenarioSelector: React.FC = () => {
   const { selectScenario } = useChat();
@@ -40,8 +40,10 @@ const ScenarioSelector: React.FC = () => {
   return (
     <div className="p-3 sm:p-4 animate-fade-in" dir="rtl">
       <div className="mb-4 text-center">
-        <Sparkles className="h-8 w-8 mx-auto mb-2 text-secondary" />
-        <h2 className="text-xl font-semibold mb-1 font-playfair">اختار سيناريو نلعب سوا</h2>
+        <div className="inline-flex items-center justify-center bg-card/60 p-3 mb-2 rounded-full">
+          <Theater className="h-7 w-7 text-accent" />
+        </div>
+        <h2 className="text-xl font-semibold mb-1 font-playfair gradient-text">اختار سيناريو نلعب سوا</h2>
         <p className="text-sm text-muted-foreground">
           شو بتحب منعمل سوا يا حلو؟
         </p>
@@ -55,11 +57,14 @@ const ScenarioSelector: React.FC = () => {
           return (
             <Card 
               key={scenario.id}
-              className="cursor-pointer bg-card hover:bg-card/80 transition-colors duration-200 border-border/50"
+              className="cursor-pointer card-gradient hover:bg-card/60 transition-colors duration-200 border-border/50 shadow-sm"
               onClick={() => selectScenario(originalScenario || null)}
             >
               <CardHeader className="p-3 pb-1 sm:p-4 sm:pb-2">
-                <CardTitle className="text-base">{scenario.title}</CardTitle>
+                <CardTitle className="text-base flex items-center">
+                  <Sparkles className="h-4 w-4 mr-2 text-secondary opacity-70" />
+                  {scenario.title}
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-3 pt-0 sm:p-4 sm:pt-0">
                 <CardDescription className="text-sm text-muted-foreground">

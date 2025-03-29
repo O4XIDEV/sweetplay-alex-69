@@ -15,7 +15,7 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 340 75% 65%;
     --secondary-foreground: 0 0% 100%;
-    --accent: 140 60% 60%;
+    --accent: 190 80% 50%;
     --accent-foreground: 0 0% 98%;
     --muted: 270 20% 25%;
     --muted-foreground: 240 5% 64.9%;
@@ -38,7 +38,7 @@
     --primary-foreground: 0 0% 100%;
     --secondary: 340 75% 65%;
     --secondary-foreground: 0 0% 100%;
-    --accent: 140 60% 60%;
+    --accent: 190 80% 50%;
     --accent-foreground: 0 0% 98%;
     --muted: 270 20% 25%;
     --muted-foreground: 240 5% 70%;
@@ -116,6 +116,23 @@
       transform: translateY(-4px);
       opacity: 0.8;
     }
+  }
+  
+  /* CUSTOM GRADIENTS AND EFFECTS */
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent via-secondary to-primary bg-clip-text text-transparent;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-card to-card/60;
+  }
+  
+  .message-bubble-user {
+    @apply bg-gradient-to-r from-primary to-primary/90;
+  }
+  
+  .message-bubble-bot {
+    @apply bg-gradient-to-r from-card to-muted;
   }
 }
 
