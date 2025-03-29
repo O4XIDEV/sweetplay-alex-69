@@ -2,7 +2,7 @@
 import React from "react";
 import { useChat } from "@/contexts/ChatContext";
 import { Button } from "@/components/ui/button";
-import { Heart, TheatreMask } from "lucide-react";
+import { Heart, Sparkles } from "lucide-react";
 import { 
   Tooltip,
   TooltipContent,
@@ -43,7 +43,7 @@ const ModeToggle: React.FC = () => {
             }`}
             onClick={() => setMode("roleplay")}
           >
-            <TheatreMask className="h-4 w-4 mr-1" />
+            <Sparkles className="h-4 w-4 mr-1" />
             <span className="text-xs">Roleplay</span>
           </Button>
         </TooltipTrigger>

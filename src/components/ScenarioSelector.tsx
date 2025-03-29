@@ -3,7 +3,7 @@ import React from "react";
 import { useChat } from "@/contexts/ChatContext";
 import { roleplayScenarios } from "@/data/sampleMessages";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { TheatreMask } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const ScenarioSelector: React.FC = () => {
   const { selectScenario } = useChat();
@@ -11,7 +11,7 @@ const ScenarioSelector: React.FC = () => {
   return (
     <div className="p-4 animate-fade-in">
       <div className="mb-4 text-center">
-        <TheatreMask className="h-8 w-8 mx-auto mb-2 text-secondary" />
+        <Sparkles className="h-8 w-8 mx-auto mb-2 text-secondary" />
         <h2 className="text-xl font-semibold mb-1">Choose a Roleplay Scenario</h2>
         <p className="text-sm text-muted-foreground">
           Select a scenario to start your roleplay with Alex
