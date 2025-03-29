@@ -4,6 +4,7 @@ import { useChat } from "@/contexts/ChatContext";
 import MessageBubble from "./MessageBubble";
 import ScenarioSelector from "./ScenarioSelector";
 import { Loader2 } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const ChatInterface: React.FC = () => {
   const { messages, isTyping, mode, scenarioSelected } = useChat();
@@ -20,7 +21,7 @@ const ChatInterface: React.FC = () => {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-4 py-6 pb-24">
+    <div className="flex-1 overflow-y-auto px-4 py-4 pb-20">
       <div className="max-w-2xl mx-auto">
         {messages.length === 0 && (
           <div className="flex items-center justify-center h-full">
@@ -37,12 +38,11 @@ const ChatInterface: React.FC = () => {
         ))}
         
         {isTyping && (
-          <div className="flex items-start mb-4">
-            <div className="h-10 w-10 flex items-center justify-center mr-2">
-              <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <Loader2 className="h-5 w-5 text-primary animate-spin" />
-              </div>
-            </div>
+          <div className="flex items-start mb-6">
+            <Avatar className="h-10 w-10 mr-2 mt-1 border-2 border-primary/20 flex-shrink-0">
+              <AvatarImage src="/lovable-uploads/624a3e22-88e3-42bc-8da6-c6d619d9c10a.png" alt="Alex" />
+              <AvatarFallback className="bg-primary/20"></AvatarFallback>
+            </Avatar>
             <div className="bg-card/50 px-4 py-2 rounded-2xl rounded-bl-sm text-muted-foreground max-w-[80%]">
               <p className="text-sm">Alex is typing...</p>
             </div>
