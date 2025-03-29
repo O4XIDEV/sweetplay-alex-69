@@ -1,6 +1,5 @@
 
 import React from "react";
-import { useChat } from "@/contexts/ChatContext";
 import ModeToggle from "./ModeToggle";
 
 const Header: React.FC = () => {
