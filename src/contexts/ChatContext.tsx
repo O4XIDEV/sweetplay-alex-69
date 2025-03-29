@@ -11,7 +11,7 @@ import {
   roleplayInitialMessages,
   roleplayScenarios
 } from "../data/sampleMessages";
-import { generateResponseWithGemini } from "../utils/geminiApi";
+import { generateResponseWithGemini, generateScenarioWithGemini } from "../utils/geminiApi";
 import { useToast } from "@/components/ui/use-toast";
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
