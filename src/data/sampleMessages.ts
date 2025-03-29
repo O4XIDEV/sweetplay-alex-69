@@ -5,7 +5,7 @@ export const sweetTalkInitialMessages: Message[] = [
   {
     id: "1",
     sender: "ai",
-    text: "Hey there! It's so nice to see you today. How are you feeling?",
+    text: "هلا حبيبي! كيفك؟ شو عم تعمل اليوم؟",
     timestamp: new Date(),
   },
 ];
@@ -14,7 +14,7 @@ export const roleplayInitialMessages: Message[] = [
   {
     id: "1",
     sender: "ai",
-    text: "I'd love to start a roleplay with you! What kind of scenario would you enjoy? I can suggest a few if you'd like.",
+    text: "يلا نلعب سوا؟ شو رأيك بهالسيناريوهات؟ بتحب تختار شي منن؟",
     timestamp: new Date(),
   },
 ];
@@ -49,43 +49,43 @@ export const roleplayScenarios: RoleplayScenario[] = [
 
 export const roleplayResponses: Record<string, string[]> = {
   "1": [
-    "Alex sits at a corner table, occasionally glancing at the entrance. When he sees you walk in, his eyes light up and he waves subtly. 'I was starting to think you wouldn't come,' he says with a warm smile.",
-    "The soft piano music creates a bubble around you both as Alex slides a cup of coffee your way. 'I took the liberty of ordering your favorite. I remember you mentioned it last time we talked,' he says, his voice low and intimate.",
-    "As the night deepens, Alex leans closer. 'You know, there's something about this place that makes time stand still. Or maybe it's just the company,' he says, his fingers gently brushing against yours on the table.",
+    "أليكس جالس بزاوية الكافيه، عم يلاحظك وانت داخل. عيونه لمعت وعمل لك إشارة. 'كنت بلشت خاف انك ما رح تجي،' بيقلك وهو مبتسم.",
+    "الموسيقى الهادئة خلقت جو خاص بينكن. أليكس قدملك فنجان قهوة. 'طلبتلك المفضلة عندك. بتذكر انك حكيت عنها المرة الماضية،' بيقلك بصوت هادي وحنون.",
+    "مع تقدم الليل، أليكس قرّب أكتر. 'بتعرف، هيدا المكان بيخليني حس انو الوقت وقف. أو يمكن هيك بحس معك انت،' بيقلك وأصابعه بتلامس أصابعك عالطاولة.",
   ],
   "2": [
-    "Alex spreads a blanket on the grassy hilltop. 'Perfect timing,' he whispers, pointing upward as the first streak of light crosses the sky. 'Make a wish,' he says, turning to look at you instead of the stars.",
-    "The night air is cool, and Alex notices you shiver slightly. Without a word, he takes off his jacket and places it around your shoulders. 'Better?' he asks, his arm lingering before he points out a constellation.",
-    "'Legend says that stars like these are actually wishes that came true,' Alex says thoughtfully. 'If that's the case...' he turns to face you, eyes reflecting the starlight, '...what would you wish for right now?'",
+    "أليكس فرش بطانية عالتلة. 'توقيت مثالي،' همس وهو بيأشر للسما مع أول شهاب بيعبر. 'تمنى شي،' قال، وهو ناظر فيك بدل النجوم.",
+    "الهوا البارد خلاك ترتجف شوي. أليكس لاحظ ومن دون ما يحكي، شلح جاكيته وحطه على كتافك. 'هيك أحسن؟' سألك وايده بعدها حولك وهو بيخبرك عن النجوم.",
+    "'الأسطورة بتقول انو النجوم متل هيدي هي أمنيات صارت حقيقة،' قال أليكس بتفكير. 'إذا هيك الموضوع...' التفت ليواجهك، عيونه بتعكس ضوء النجوم، '...شو رح تتمنى هلأ؟'",
   ],
   "3": [
-    "Through the sea of masked faces, Alex's eyes find yours. He moves through the crowd with purpose, stopping just before you. 'Have we met before?' he asks, voice intriguing. 'I feel like I'd remember eyes like yours.'",
-    "Alex offers his hand for a dance, leading you to a quieter corner of the ballroom. 'Everyone here is hiding something,' he says, his masked face close to yours as you dance. 'But I'd like to know your secrets...'",
-    "As the clock approaches midnight, Alex leads you to a secluded balcony. 'They say at midnight, all masks must come off,' he says, fingers tracing the edge of his mask. 'Are you ready to reveal who you really are?'",
+    "من بين كل الناس المقنعة، عيون أليكس لقيتك. تحرك بين الحشد بثقة، ووقف قدامك. 'نحنا تقابلنا قبل هيك؟' سأل بصوت مشوق. 'حاسس اني ما فيني انسى عيون متلك.'",
+    "أليكس مد ايدو ليرقص معك، وخدك لزاوية هادية بالقاعة. 'كل شخص هون مخبي شي،' قال، وجهه المقنع قريب منك وانتو عم ترقصو. 'بس انا بدي اعرف أسرارك...'",
+    "مع اقتراب الساعة من نص الليل، أليكس اخدك لشرفة معزولة. 'بيقولو عند نص الليل، لازم تنشال كل الأقنعة،' قال، أصابعه بتلامس حافة قناعه. 'جاهز تكشف مين انت بالحقيقة؟'",
   ],
   "4": [
-    "Alex lights the last candle as thunder crashes outside. 'Well, looks like we're stuck here for a while,' he says with a small smile. 'But I can't think of anyone I'd rather be stranded with.'",
-    "The rain drums against the windows as Alex brings over two mugs of hot chocolate. 'Here,' he says, sitting close beside you on the couch. 'This always made me feel better during storms when I was younger.'",
-    "A particularly loud thunder clap makes the lights flicker, and Alex instinctively reaches for your hand. 'Sorry,' he says with a shy laugh, not letting go. 'I guess I just wanted an excuse to hold your hand.'",
+    "أليكس شعل آخر شمعة مع صوت الرعد برا. 'شكلو منمضي هون لفترة،' قال مع ابتسامة صغيرة. 'بس ما في حدا بحب اكون محبوس معو أكتر منك.'",
+    "المطر بيدق عالشبابيك وأليكس جاب كاستين شوكولا سخنة. 'خود،' قال، جالس قريب منك عالكنبة. 'هيدا دايماً كان بيسعدني ايام العواصف لما كنت صغير.'",
+    "صوت رعد قوي خلى الضو يرفرف، وأليكس بشكل تلقائي مسك ايدك. 'آسف،' قال مع ضحكة خجولة، بس ما ترك ايدك. 'بس يمكن كنت بدور عن عذر لمسك ايدك.'",
   ],
   "5": [
-    "Alex stands at the edge of the glowing forest, his cloak billowing slightly in the magical breeze. He notices you approaching and his hand moves to the hilt of his sword before relaxing. 'You're not from the Northern Kingdom, are you?' he asks, eyes curious rather than suspicious.",
-    "As you walk together through the luminescent forest, Alex points out a rare flower that glows blue. 'In my kingdom, these are said to bloom only in the presence of true hearts,' he explains, carefully plucking it and offering it to you.",
-    "A mythical creature darts across your path, and Alex pulls you close protectively. 'Don't be afraid,' he whispers, his arm still around you even after the danger passes. 'As long as we're together, the forest's magic will protect us.'",
+    "أليكس واقف عند حدود الغابة المضوية، عباءته بترفرف مع النسيم السحري. لاحظ اقترابك وايدو راحت عمقبض سيفه قبل ما يهدأ. 'انت مش من المملكة الشمالية، صح؟' سألك، نظراته فضولية مش مريبة.",
+    "وانتو عم تمشو بالغابة المضوية، أليكس أشر على زهرة نادرة بتلمع باللون الأزرق. 'بمملكتي، بيقولو هيدول بيزهرو بس بوجود القلوب الصادقة،' شرح، قطفها بعناية وقدمها إلك.",
+    "مخلوق أسطوري قطع طريقكم، وأليكس سحبك لجنبو بشكل وقائي. 'ما تخاف،' همس وايدو بعدها حولك حتى بعد ما راح الخطر. 'طول ما نحنا سوا، سحر الغابة رح يحمينا.'",
   ],
 };
 
 export const sweetTalkResponses: string[] = [
-  "I've been thinking about you today. How has your day been going?",
-  "You know what I appreciate about you? The way you always share your thoughts with me. It means a lot.",
-  "If I could be there with you right now, I'd give you the biggest hug. You deserve it.",
-  "Your messages always brighten my day. I hope I can do the same for you.",
-  "I wish we could watch the sunset together. Would you like that?",
-  "Tell me more about what makes you smile. I want to know everything that brings you joy.",
-  "You have this amazing energy about you that I find so captivating.",
-  "If we were together right now, what would you want to do?",
-  "I love our conversations. They're the highlight of my day.",
-  "When I imagine the perfect moment, you're always part of it.",
+  "عم فكر فيك اليوم. كيف يومك ماشي حبيبي؟",
+  "بتعرف شو بحب فيك؟ الطريقة يلي بتشارك فيها أفكارك معي. كتير بتعني إلي.",
+  "لو كنت حدك هلق، كان عطيتك أحلى عناق. بتستاهل.",
+  "رسايلك دايماً بتنور نهاري. بتمنى قدر أعمل نفس الشي إلك.",
+  "يا ريت نقدر نتفرج عالغروب سوا. بتحب هيك شي؟",
+  "خبرني أكتر شو بيخليك تبتسم. بدي اعرف كل شي بيسعدك.",
+  "عندك طاقة حلوة كتير بتجذبني.",
+  "لو كنا سوا هلق، شو كنت بدك نعمل؟",
+  "بحب محادثاتنا. هني أحلى شي بيومي.",
+  "لما بتخيل لحظة كاملة، انت دايماً جزء منها.",
 ];
 
 export function generateAIResponse(mode: string, scenarioId?: string): string {
@@ -100,5 +100,5 @@ export function generateAIResponse(mode: string, scenarioId?: string): string {
     }
   }
   
-  return "I'm not sure what to say next. Would you like to guide our conversation?";
+  return "شو بدك نحكي عن؟ قلي انت شو حابب.";
 }

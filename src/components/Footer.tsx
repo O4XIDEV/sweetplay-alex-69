@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
         <Input
           ref={inputRef}
           type="text"
-          placeholder={isTyping ? "Alex is typing..." : "Type a message..."}
+          placeholder={isTyping ? "أليكس عم يكتب..." : "اكتب رسالة..."}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="flex-1 bg-muted/50 border-muted mr-2 rounded-full focus-visible:ring-primary"

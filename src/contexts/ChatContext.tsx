@@ -28,21 +28,21 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
   // Reset messages when mode changes
   useEffect(() => {
     if (mode === "sweetTalk") {
-      // Initialize with Arabic greeting
+      // Initialize with Lebanese greeting
       const initialGreeting: Message = {
         id: Date.now().toString(),
         sender: "ai",
-        text: "مرحباً! كيف حالك اليوم؟ أنا أليكس وأنا هنا للتحدث معك.",
+        text: "هلا حبيبي! كيفك؟ شو عم تعمل اليوم؟",
         timestamp: new Date(),
       };
       setMessages([initialGreeting]);
       setScenarioSelected(null);
     } else {
-      // Initialize roleplay with Arabic prompt
+      // Initialize roleplay with Lebanese prompt
       const initialRoleplayMessage: Message = {
         id: Date.now().toString(),
         sender: "ai",
-        text: "أهلاً! يسعدني أن نبدأ سيناريو لعب أدوار معاً. هل ترغب في اختيار سيناريو من القائمة؟",
+        text: "هلا فيك! بتحب نلعب سوا شي سيناريو حلو؟ اختار شي من القائمة يلا",
         timestamp: new Date(),
       };
       setMessages([initialRoleplayMessage]);
@@ -81,7 +81,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     } catch (error) {
       console.error("Error generating response:", error);
       toast({
-        description: "حدث خطأ في إنشاء الرد. يرجى المحاولة مرة أخرى.",
+        description: "في مشكلة صغيرة. بتقدر تعيد المحاولة؟",
       });
     } finally {
       setIsTyping(false);
@@ -93,7 +93,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
       const initialGreeting: Message = {
         id: Date.now().toString(),
         sender: "ai",
-        text: "مرحباً من جديد! كيف يمكنني مساعدتك اليوم؟",
+        text: "هلا من جديد حبيبي! كيفك اليوم؟",
         timestamp: new Date(),
       };
       setMessages([initialGreeting]);
@@ -101,14 +101,14 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
       const initialRoleplayMessage: Message = {
         id: Date.now().toString(),
         sender: "ai",
-        text: "دعنا نبدأ سيناريو جديد. ما الذي ترغب في تجربته؟",
+        text: "يلا نبلش سيناريو جديد؟ شو بتحب نعمل سوا؟",
         timestamp: new Date(),
       };
       setMessages([initialRoleplayMessage]);
     }
     
     toast({
-      description: "تم مسح سجل المحادثة.",
+      description: "تم مسح المحادثة",
     });
   };
 
@@ -120,8 +120,8 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsTyping(true);
       
       try {
-        // Generate an Arabic introduction to the scenario
-        const scenarioPrompt = `أنت أليكس في سيناريو لعب أدوار. قم بتقديم وصف لهذا السيناريو باللغة العربية بطريقة جذابة ورومانسية (2-3 جمل): ${scenario.title} - ${scenario.description}`;
+        // Generate a Lebanese introduction to the scenario
+        const scenarioPrompt = `أنت أليكس، صديق وحبيب المستخدم. قدم وصف لهذا السيناريو باللهجة اللبنانية بطريقة طبيعية وعفوية كأنك تتحدث مع حبيبتك/حبيبك (جملة أو جملتين): ${scenario.title} - ${scenario.description}`;
         
         const arabicScenarioDescription = await generateScenarioWithGemini(scenarioPrompt);
         
@@ -150,7 +150,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
           .catch(error => {
             console.error("Error generating initial roleplay message:", error);
             toast({
-              description: "حدث خطأ في بدء لعب الأدوار. يرجى المحاولة مرة أخرى.",
+              description: "في مشكلة صغيرة. منعيد المحاولة؟",
             });
           })
           .finally(() => {
@@ -161,7 +161,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
         console.error("Error generating scenario description:", error);
         setIsTyping(false);
         toast({
-          description: "حدث خطأ في تحميل السيناريو. يرجى المحاولة مرة أخرى.",
+          description: "في مشكلة صغيرة. منعيد المحاولة؟",
         });
       }
     }

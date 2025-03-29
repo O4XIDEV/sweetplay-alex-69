@@ -8,32 +8,32 @@ import { Sparkles } from "lucide-react";
 const ScenarioSelector: React.FC = () => {
   const { selectScenario } = useChat();
 
-  // Arabic scenario titles and descriptions
+  // Lebanese scenario titles and descriptions
   const arabicScenarios = [
     {
       id: "1",
-      title: "مقهى منتصف الليل",
-      description: "نلتقي في مقهى هادئ في وقت متأخر من الليل. الأجواء حميمية مع موسيقى الجاز الناعمة في الخلفية."
+      title: "كافيه نص الليل",
+      description: "منلتقي بكافيه هادي متأخر بالليل. الجو رومانسي مع موسيقى جاز ناعمة بالخلفية."
     },
     {
       id: "2",
-      title: "مغامرة مشاهدة النجوم",
-      description: "نذهب في رحلة عفوية لمشاهدة زخات النيازك من تلة معزولة."
+      title: "مغامرة تحت النجوم",
+      description: "منروح رحلة ما خططنالها لنشوف زخات الشهب من تلة بعيدة."
     },
     {
       id: "3",
       title: "لقاء غامض",
-      description: "نلتقي في حفل تنكري، كلانا يخفي أسراراً خلف أقنعتنا."
+      description: "منتلاقى بحفلة تنكرية، كل واحد منا مخبي أسرار ورا قناعو."
     },
     {
       id: "4",
-      title: "يوم ممطر دافئ",
-      description: "نحن محاصرون في الداخل خلال عاصفة رعدية، مع ضوء الشموع ورفقة بعضنا البعض فقط."
+      title: "يوم شتوي دافي",
+      description: "نحنا محبوسين جوا البيت بسبب عاصفة، بس ضو الشموع ورفقتك بيكفوني."
     },
     {
       id: "5",
-      title: "عالم الخيال",
-      description: "نحن مسافران من ممالك مختلفة نلتقي عند حافة غابة ساحرة."
+      title: "عالم خيالي",
+      description: "نحنا مسافرين من ممالك مختلفة منلتقي عند حدود غابة سحرية."
     }
   ];
 
@@ -41,9 +41,9 @@ const ScenarioSelector: React.FC = () => {
     <div className="p-4 animate-fade-in" dir="rtl">
       <div className="mb-4 text-center">
         <Sparkles className="h-8 w-8 mx-auto mb-2 text-secondary" />
-        <h2 className="text-xl font-semibold mb-1">اختر سيناريو لعب الأدوار</h2>
+        <h2 className="text-xl font-semibold mb-1">اختار سيناريو نلعب سوا</h2>
         <p className="text-sm text-muted-foreground">
-          حدد سيناريو لبدء لعب الأدوار مع أليكس
+          شو بتحب منعمل سوا يا حلو؟
         </p>
       </div>
       
