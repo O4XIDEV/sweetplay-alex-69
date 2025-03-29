@@ -8,32 +8,34 @@ const ModeToggle: React.FC = () => {
   const { mode, setMode } = useChat();
 
   return (
-    <div className="flex rounded-full bg-muted/50 p-1">
+    <div className="flex items-center space-x-4">
       <Button
-        variant={mode === "sweetTalk" ? "default" : "ghost"}
+        variant="ghost"
         size="sm"
-        className={`rounded-full px-4 py-1 ${
+        className={`text-lg px-4 py-1 rounded-full ${
           mode === "sweetTalk" 
-            ? "bg-primary text-primary-foreground" 
-            : "text-muted-foreground hover:bg-muted"
+            ? "text-primary font-semibold" 
+            : "text-muted-foreground hover:text-foreground"
         }`}
         onClick={() => setMode("sweetTalk")}
       >
-        <Heart className="h-4 w-4 mr-2" />
+        <Heart className={`h-5 w-5 mr-2 ${
+          mode === "sweetTalk" ? "fill-primary" : ""
+        }`} />
         <span>Sweet Talk</span>
       </Button>
 
       <Button
-        variant={mode === "roleplay" ? "default" : "ghost"}
+        variant="default"
         size="sm"
-        className={`rounded-full px-4 py-1 ${
+        className={`text-lg px-4 py-1 rounded-full ${
           mode === "roleplay" 
-            ? "bg-secondary text-secondary-foreground" 
-            : "text-muted-foreground hover:bg-muted"
+            ? "bg-secondary text-white font-semibold" 
+            : "bg-muted text-muted-foreground hover:bg-secondary/80 hover:text-white"
         }`}
         onClick={() => setMode("roleplay")}
       >
-        <Sparkles className="h-4 w-4 mr-2" />
+        <Sparkles className="h-5 w-5 mr-2" />
         <span>Roleplay</span>
       </Button>
     </div>

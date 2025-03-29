@@ -64,12 +64,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				sweetplay: {
-					purple: '#9b87f5',
+					purple: '#c359ff',
 					'light-purple': '#D6BCFA',
-					pink: '#FF4081',
+					pink: '#FF6B9E',
 					'light-pink': '#F8BBD0',
-					dark: '#1A1F2C',
-					'dark-gray': '#2D3142',
+					dark: '#1A1221',
+					'dark-gray': '#2D2636',
 					'light-gray': '#D6D6D6',
 				}
 			},
@@ -131,8 +131,8 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'gradient-purple': 'linear-gradient(to right, #7E69AB, #9b87f5)',
-				'gradient-pink': 'linear-gradient(to right, #FF4081, #F48FB1)'
+				'gradient-purple': 'linear-gradient(to right, #9b1aff, #c359ff)',
+				'gradient-pink': 'linear-gradient(to right, #FF4081, #FF6B9E)'
 			}
 		}
 	},
