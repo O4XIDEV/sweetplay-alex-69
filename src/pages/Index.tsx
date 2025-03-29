@@ -10,7 +10,7 @@ const Index: React.FC = () => {
     <ChatProvider>
       <div className="flex flex-col h-screen bg-background overflow-hidden">
         <Header />
-        <main className="flex-1 pt-16 pb-16 flex flex-col overflow-hidden">
+        <main className="flex-1 pt-14 sm:pt-16 pb-14 sm:pb-16 flex flex-col overflow-hidden">
           <ChatInterface />
         </main>
         <Footer />

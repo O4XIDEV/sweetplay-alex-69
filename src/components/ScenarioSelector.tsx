@@ -38,10 +38,10 @@ const ScenarioSelector: React.FC = () => {
   ];
 
   return (
-    <div className="p-4 animate-fade-in" dir="rtl">
+    <div className="p-3 sm:p-4 animate-fade-in" dir="rtl">
       <div className="mb-4 text-center">
         <Sparkles className="h-8 w-8 mx-auto mb-2 text-secondary" />
-        <h2 className="text-xl font-semibold mb-1">اختار سيناريو نلعب سوا</h2>
+        <h2 className="text-xl font-semibold mb-1 font-playfair">اختار سيناريو نلعب سوا</h2>
         <p className="text-sm text-muted-foreground">
           شو بتحب منعمل سوا يا حلو؟
         </p>
@@ -58,10 +58,10 @@ const ScenarioSelector: React.FC = () => {
               className="cursor-pointer bg-card hover:bg-card/80 transition-colors duration-200 border-border/50"
               onClick={() => selectScenario(originalScenario || null)}
             >
-              <CardHeader className="p-4 pb-2">
+              <CardHeader className="p-3 pb-1 sm:p-4 sm:pb-2">
                 <CardTitle className="text-base">{scenario.title}</CardTitle>
               </CardHeader>
-              <CardContent className="p-4 pt-0">
+              <CardContent className="p-3 pt-0 sm:p-4 sm:pt-0">
                 <CardDescription className="text-sm text-muted-foreground">
                   {scenario.description}
                 </CardDescription>
