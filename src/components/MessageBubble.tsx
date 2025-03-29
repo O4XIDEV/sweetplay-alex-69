@@ -16,16 +16,18 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, isLatest }) => {
     minute: "2-digit",
   });
 
+  // Check if message contains Arabic text
+  const containsArabic = /[\u0600-\u06FF]/.test(message.text);
+
   return (
     <div
       className={cn(
-        "flex w-full mb-6 animate-fade-in",
+        "flex w-full mb-4 animate-fade-in",
         isUser ? "justify-end" : "justify-start"
       )}
-      dir={message.text && /[\u0600-\u06FF]/.test(message.text) ? "rtl" : "ltr"}
     >
       {!isUser && (
-        <Avatar className="h-10 w-10 mr-2 mt-1 border-2 border-primary/20 flex-shrink-0">
+        <Avatar className="h-9 w-9 mr-2 mt-1 border border-primary/20 flex-shrink-0">
           <AvatarImage src="/lovable-uploads/624a3e22-88e3-42bc-8da6-c6d619d9c10a.png" alt="Alex" />
           <AvatarFallback className="bg-primary/20"></AvatarFallback>
         </Avatar>
@@ -39,6 +41,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, isLatest }) => {
               ? "bg-primary text-primary-foreground rounded-br-sm"
               : "bg-card text-card-foreground rounded-bl-sm"
           )}
+          dir={containsArabic ? "rtl" : "ltr"}
         >
           <p className="text-sm whitespace-pre-wrap break-words">{message.text}</p>
         </div>
@@ -53,7 +56,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, isLatest }) => {
       </div>
 
       {isUser && (
-        <Avatar className="h-10 w-10 ml-2 mt-1 border-2 border-primary/20 flex-shrink-0">
+        <Avatar className="h-9 w-9 ml-2 mt-1 border border-primary/20 flex-shrink-0">
           <AvatarImage src="/lovable-uploads/0aa33a32-a44c-4cc6-a1d7-a00829a8b8ef.png" alt="You" />
           <AvatarFallback className="bg-primary/20"></AvatarFallback>
         </Avatar>

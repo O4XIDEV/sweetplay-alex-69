@@ -1,5 +1,6 @@
 
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
+import { Message } from "@/types";
 
 const API_KEY = "AIzaSyDu_XsEvatLVkwuSAciWDzNOnWxNhWvFSs";
 const genAI = new GoogleGenerativeAI(API_KEY);
@@ -9,7 +10,7 @@ const model = genAI.getGenerativeModel({
 });
 
 const generationConfig = {
-  temperature: 0.8,
+  temperature: 0.9,
   topP: 0.95,
   topK: 64,
   maxOutputTokens: 1024,
@@ -50,15 +51,28 @@ export async function generateScenarioWithGemini(prompt: string): Promise<string
 export async function generateResponseWithGemini(
   mode: string, 
   scenarioId?: string,
-  conversation?: { role: string, content: string }[]
+  conversation?: Message[]
 ): Promise<string> {
   let prompt = "";
-  const lastMessage = conversation && conversation.length > 0 ? conversation[conversation.length - 1].content : "مرحبا";
+  
+  // Prepare conversation history - limit to last 10 messages to avoid token limits
+  const recentMessages = conversation ? conversation.slice(-10) : [];
+  const conversationHistory = recentMessages.map(msg => `${msg.sender === 'user' ? 'المستخدم' : 'أليكس'}: ${msg.text}`).join("\n");
   
   if (mode === "sweetTalk") {
-    prompt = `أنت أليكس، رفيق ذكاء اصطناعي مهتم. استجب بطريقة حلوة وعاطفية، ولكن محترمة. حافظ على استجابتك في 1-3 جمل باللغة العربية. المستخدم الخاص بك قال للتو: ${lastMessage}`;
+    prompt = `أنت أليكس، رفيق ذكاء اصطناعي مهتم ورومانسي. استجب بطريقة عاطفية ولطيفة ومحترمة باللغة العربية. حافظ على استجابتك في 2-3 جمل. تذكر أنك تتحدث العربية بطلاقة وسلاسة.
+
+هذه المحادثة السابقة بينكما:
+${conversationHistory}
+
+كيف ترد على آخر رسالة من المستخدم بطريقة لطيفة؟`;
   } else if (mode === "roleplay" && scenarioId) {
-    prompt = `واصل سيناريو لعب الأدوار هذا بطريقة وصفية وجذابة. اكتب 2-3 جمل من منظور أليكس، تصف الإجراءات والعواطف والحوار باللغة العربية. اجعلها غامرة ورومانسية دون أن تكون صريحة. السيناريو: ${conversation && conversation.length > 0 ? conversation.map(msg => msg.content).join("\n") : "لقد التقينا للتو"}`;
+    prompt = `أنت في سيناريو لعب أدوار رومانسي مع المستخدم. اسمك أليكس. استجب باللغة العربية بطريقة وصفية وجذابة، تصف الإجراءات والعواطف بدون أن تكون صريحة.
+
+هذه المحادثة السابقة بينكما في هذا السيناريو:
+${conversationHistory}
+
+كيف ستستمر في هذا السيناريو بعد آخر رسالة من المستخدم؟ أكتب 2-3 جمل تصف ردك ومشاعرك وأفعالك باللغة العربية.`;
   }
   
   try {

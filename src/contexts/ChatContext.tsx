@@ -28,10 +28,24 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
   // Reset messages when mode changes
   useEffect(() => {
     if (mode === "sweetTalk") {
-      setMessages(sweetTalkInitialMessages);
+      // Initialize with Arabic greeting
+      const initialGreeting: Message = {
+        id: Date.now().toString(),
+        sender: "ai",
+        text: "مرحباً! كيف حالك اليوم؟ أنا أليكس وأنا هنا للتحدث معك.",
+        timestamp: new Date(),
+      };
+      setMessages([initialGreeting]);
       setScenarioSelected(null);
     } else {
-      setMessages(roleplayInitialMessages);
+      // Initialize roleplay with Arabic prompt
+      const initialRoleplayMessage: Message = {
+        id: Date.now().toString(),
+        sender: "ai",
+        text: "أهلاً! يسعدني أن نبدأ سيناريو لعب أدوار معاً. هل ترغب في اختيار سيناريو من القائمة؟",
+        timestamp: new Date(),
+      };
+      setMessages([initialRoleplayMessage]);
     }
   }, [mode]);
 
@@ -49,22 +63,11 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsTyping(true);
 
     try {
-      // Prepare conversation history for Gemini API
-      const conversationHistory = messages.slice(-5).map(msg => ({
-        role: msg.sender === "user" ? "user" : "assistant",
-        content: msg.text,
-      }));
-      
-      conversationHistory.push({
-        role: "user",
-        content: text,
-      });
-      
-      // Generate AI response using Gemini API
+      // Pass the entire message history to maintain context
       const aiResponse = await generateResponseWithGemini(
         mode, 
         scenarioSelected?.id,
-        conversationHistory
+        [...messages, newUserMessage] // Include the new user message
       );
       
       const newAIMessage: Message = {
@@ -78,7 +81,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     } catch (error) {
       console.error("Error generating response:", error);
       toast({
-        description: "There was an error generating a response. Please try again.",
+        description: "حدث خطأ في إنشاء الرد. يرجى المحاولة مرة أخرى.",
       });
     } finally {
       setIsTyping(false);
@@ -87,13 +90,25 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const clearMessages = () => {
     if (mode === "sweetTalk") {
-      setMessages(sweetTalkInitialMessages);
+      const initialGreeting: Message = {
+        id: Date.now().toString(),
+        sender: "ai",
+        text: "مرحباً من جديد! كيف يمكنني مساعدتك اليوم؟",
+        timestamp: new Date(),
+      };
+      setMessages([initialGreeting]);
     } else {
-      setMessages(roleplayInitialMessages);
+      const initialRoleplayMessage: Message = {
+        id: Date.now().toString(),
+        sender: "ai",
+        text: "دعنا نبدأ سيناريو جديد. ما الذي ترغب في تجربته؟",
+        timestamp: new Date(),
+      };
+      setMessages([initialRoleplayMessage]);
     }
     
     toast({
-      description: "Chat history cleared.",
+      description: "تم مسح سجل المحادثة.",
     });
   };
 
@@ -101,42 +116,54 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({
     setScenarioSelected(scenario);
     
     if (scenario) {
-      const newAIMessage: Message = {
-        id: Date.now().toString(),
-        sender: "ai",
-        text: `Let's begin our "${scenario.title}" roleplay. ${scenario.description}`,
-        timestamp: new Date(),
-      };
+      // Create an Arabic version of the scenario description
+      setIsTyping(true);
       
-      setMessages([newAIMessage]);
-      
-      // Add first roleplay message after a delay
-      setTimeout(() => {
-        setIsTyping(true);
+      try {
+        // Generate an Arabic introduction to the scenario
+        const scenarioPrompt = `أنت أليكس في سيناريو لعب أدوار. قم بتقديم وصف لهذا السيناريو باللغة العربية بطريقة جذابة ورومانسية (2-3 جمل): ${scenario.title} - ${scenario.description}`;
         
-        generateResponseWithGemini(mode, scenario.id, [
-          { role: "assistant", content: newAIMessage.text }
-        ])
-        .then(aiResponse => {
-          const firstRoleplayMessage: Message = {
-            id: (Date.now() + 1).toString(),
-            sender: "ai",
-            text: aiResponse,
-            timestamp: new Date(),
-          };
-          
-          setMessages((prev) => [...prev, firstRoleplayMessage]);
-        })
-        .catch(error => {
-          console.error("Error generating initial roleplay message:", error);
-          toast({
-            description: "There was an error starting the roleplay. Please try again.",
+        const arabicScenarioDescription = await generateScenarioWithGemini(scenarioPrompt);
+        
+        const newAIMessage: Message = {
+          id: Date.now().toString(),
+          sender: "ai",
+          text: arabicScenarioDescription,
+          timestamp: new Date(),
+        };
+        
+        setMessages([newAIMessage]);
+        
+        // Add first roleplay message after a delay
+        setTimeout(() => {
+          generateResponseWithGemini(mode, scenario.id, [newAIMessage])
+          .then(aiResponse => {
+            const firstRoleplayMessage: Message = {
+              id: (Date.now() + 1).toString(),
+              sender: "ai",
+              text: aiResponse,
+              timestamp: new Date(),
+            };
+            
+            setMessages((prev) => [...prev, firstRoleplayMessage]);
+          })
+          .catch(error => {
+            console.error("Error generating initial roleplay message:", error);
+            toast({
+              description: "حدث خطأ في بدء لعب الأدوار. يرجى المحاولة مرة أخرى.",
+            });
+          })
+          .finally(() => {
+            setIsTyping(false);
           });
-        })
-        .finally(() => {
-          setIsTyping(false);
+        }, 1000);
+      } catch (error) {
+        console.error("Error generating scenario description:", error);
+        setIsTyping(false);
+        toast({
+          description: "حدث خطأ في تحميل السيناريو. يرجى المحاولة مرة أخرى.",
         });
-      }, 1000);
+      }
     }
   };
 
